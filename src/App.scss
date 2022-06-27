@@ -1,0 +1,40 @@
+body {
+    font-family: 'Josefin Sans';
+    background-color: #FFFAFB;
+  }
+  
+  * {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+  
+  }
+
+  .promo {
+    &__banner {
+      &-img {
+        position: absolute;
+        right: 40px;
+        top: 0px;
+        width: 700px;
+        height: 900px;
+        margin-top: -330px;
+      }
+    }
+  }
+  
+  .bodyPart {
+    &__card {
+      transform: scale(1, 1);
+      transition: 0.3s all ease-in-out;
+      &:hover {
+        transform: scale(1.1, 1.1);
+      }
+    }
+    
+  }
+  
+  .search__btn:hover {
+    color: #FF2625 !important;
+    border: 1px solid #FF2625 !important;
+  }
