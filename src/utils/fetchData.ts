@@ -14,7 +14,6 @@ export interface FetchExercisesReturn {
     data: any
 }
 
-const baseUrl = 'https://exercisedb.p.rapidapi.com/exercises';
 
 const exerciseOptions: FetchOptions = {
     method: 'GET',
@@ -31,7 +30,11 @@ export function useFetchExercises(url:string, apiName: string, options=exerciseO
         ),
         {
             cacheTime: 10 * 60 * 1000,
-            staleTime: 5 * 60 * 1000
+            staleTime: 5 * 60 * 1000,
+            retry: 2,
+            refetchInterval: 30 * 60* 1000,
+            refetchOnMount: false,
+            refetchOnWindowFocus: false
         }
     )
 
