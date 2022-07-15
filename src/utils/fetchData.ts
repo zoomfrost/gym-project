@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+
 
 export interface FetchOptions {
     method: string,
@@ -22,25 +22,3 @@ const exerciseOptions: FetchOptions = {
       'X-RapidAPI-Key': 'fde75d440fmsh7ca357a22a651e6p19cd65jsna6a19ab47c01',
     },
 };
-
-export function useFetchExercises(url:string, apiName: string, options=exerciseOptions): FetchExercisesReturn {
-    const { isLoading, error, data } = useQuery(apiName, () => 
-        fetch(url, options).then(res =>
-            res.json()
-        ),
-        {
-            cacheTime: 10 * 60 * 1000,
-            staleTime: 5 * 60 * 1000,
-            retry: 2,
-            refetchInterval: 30 * 60* 1000,
-            refetchOnMount: false,
-            refetchOnWindowFocus: false
-        }
-    )
-
-    return {
-        isLoading,
-        error,
-        data
-    }
-}

@@ -1,11 +1,13 @@
-import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import { useEffect, useState} from 'react';
 import { Box, Button, Input, Stack, TextField, Typography } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import {useFetchExercises} from '../utils/fetchData';
 import { HorizontalScrollBar } from './HorizontalScrollBar';
-import { ExercisesComponentsProps } from '../types/interfaces';
+import { useGetExercisesQuery } from '../api/exercisesApi';
+import {gymSetBodyPart, gymSetExercises, gymSetSearch} from '../slices/exercisesSlice';
+import {useSelector, useDispatch} from 'react-redux';
+import { RootState } from '../store/index';
 
 
 interface FormValues {
@@ -28,32 +30,31 @@ const schema = yup.object({
 }).required();
 
 
-export const SearchExercises = ({selectedBodyPart, setSelectedBodyPart, setExercises}: ExercisesComponentsProps) => {
+export const SearchExercises = () => {
 
-    const {isLoading, error, data} = useFetchExercises('https://exercisedb.p.rapidapi.com/exercises', 'exercises');
-    const {data: bodyPartsData} = useFetchExercises('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', 'bodyPart');
+    const dispatch = useDispatch();
 
+    const {isLoading, error, data} = useGetExercisesQuery('exercises');
+    const {data: bodyPartsData} = useGetExercisesQuery('exercises/bodyPartList')
 
-    const [search, setSearch] = useState('');
-    const [bodyPart, setBodyPart] = useState(['']);
+    const bodyPart = useSelector((state: RootState) => state.gym.bodyPart);
+    console.log(bodyPart)
+    const search = useSelector((state: RootState) => state.gym.search);
 
     const { register, reset, handleSubmit, formState: { errors } } = useForm<FormValues>({
         resolver: yupResolver(schema)
       });
 
     const onSubmit: SubmitHandler<FormValues> = data => {
-        setSearch(data?.searchTerm)
+        dispatch(gymSetSearch(data?.searchTerm))
         reset()
     };
 
     useEffect(() => {
         if (bodyPartsData != null) {
-            setBodyPart(['all', ...bodyPartsData])
+            dispatch(gymSetBodyPart(['all', ...bodyPartsData]))
         }
-    }, [bodyPartsData]);
-
-    console.log(bodyPart)
-    
+    }, [bodyPartsData]);   
    
    const handleSearch = () => {
         if (search) {
@@ -63,7 +64,7 @@ export const SearchExercises = ({selectedBodyPart, setSelectedBodyPart, setExerc
                 || exercise.equipment.toLowerCase().includes(search)
                 || exercise.bodyPart.toLowerCase().includes(search)
             );
-            setExercises(filteredExercises)
+            dispatch(gymSetExercises(filteredExercises))
         }
    }
 
@@ -132,10 +133,8 @@ export const SearchExercises = ({selectedBodyPart, setSelectedBodyPart, setExerc
                     p: '20px'
                 }}
             >
-                <HorizontalScrollBar 
+                <HorizontalScrollBar
                     data={bodyPart}
-                    selectedBodyPart={selectedBodyPart}
-                    setSelectedBodyPart={setSelectedBodyPart}
                 />
             </Box>
         </Stack>

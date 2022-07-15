@@ -1,7 +1,9 @@
-import React from 'react'
-import { ExercisesComponentsProps } from '../types/interfaces'
 
-export const Exercises = ({selectedBodyPart, setSelectedBodyPart, setExercises}: ExercisesComponentsProps) => {
+import Pagination from '@mui/material/Pagination';
+import { Box, Stack, Typography } from '@mui/material';
+
+
+export const Exercises = () => {
   return (
     <div>Exercises</div>
   )

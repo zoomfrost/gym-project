@@ -1,11 +1,16 @@
 import { Stack, Typography } from "@mui/material";
 
 import { HorizontalBodyPartProps } from "../types/interfaces";
+import { useDispatch, useSelector } from "react-redux";
+import { gymSetSelectedBodyPart } from "../slices/exercisesSlice";
 
 import icon from '../assets/icons/gym.png';
+import { RootState } from "../store";
 
 
-export const BodyPart = ({data, selectedBodyPart, setSelectedBodyPart}: HorizontalBodyPartProps<string>) => {
+export const BodyPart = ({data}: HorizontalBodyPartProps<string>) => {
+    const dispatch = useDispatch()
+    const selectedBodyPart = useSelector((state: RootState) => state.gym.selectedBodyPart);
   return (
     <Stack
         component='button'
@@ -22,7 +27,7 @@ export const BodyPart = ({data, selectedBodyPart, setSelectedBodyPart}: Horizont
             gap: '47px',
             borderTop: selectedBodyPart ===  data ? '4px solid #ff2625': ''
         }}
-        onClick={() => setSelectedBodyPart(data)}
+        onClick={() => dispatch(gymSetSelectedBodyPart(data))}
     >
         <img 
             src={icon} 

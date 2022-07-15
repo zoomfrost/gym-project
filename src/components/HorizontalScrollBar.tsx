@@ -8,9 +8,6 @@ import { useContext } from "react";
 import leftArrow from '../assets/icons/left-arrow.png';
 import rightArrow from '../assets/icons/right-arrow.png';
   
-interface MyDivProps extends React.HTMLAttributes<HTMLDivElement> {
-  itemId?: string
-}
 
 const LeftArrow = () => {
   const { scrollPrev } = useContext(VisibilityContext);
@@ -26,10 +23,7 @@ const RightArrow = () => {
   const { scrollNext } = useContext(VisibilityContext);
 
   return (
-    <Typography onClick={() => {
-      scrollNext();
-      console.log('a')
-    }} className="arrow">
+    <Typography onClick={() => scrollNext()} className="arrow">
       <img src={rightArrow} alt="arrow" />
     </Typography>
   );
@@ -44,17 +38,19 @@ const ScrollableBoxWrapper = ({ children, ...props}: ScrollableBoxWrapperProps) 
 }
 
 
-export const HorizontalScrollBar = ({data, selectedBodyPart, setSelectedBodyPart}: HorizontalBodyPartProps<string[]>) => {
+export const HorizontalScrollBar = ({data}: HorizontalBodyPartProps<Array<string>>) => {
   return (
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
       {data.map((item) => (
-          <ScrollableBoxWrapper itemId={item}>
+          <ScrollableBoxWrapper 
+            key={item}
+            itemId={item}
+          >
               <Box 
-              key={item}
               title={item}
               m="0 40px"
             >
-              <BodyPart data={item} selectedBodyPart={selectedBodyPart} setSelectedBodyPart={setSelectedBodyPart} />
+              <BodyPart data={item}/>
             </Box>
           </ScrollableBoxWrapper>
         )

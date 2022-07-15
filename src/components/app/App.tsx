@@ -1,10 +1,10 @@
 import {Route, Routes} from 'react-router-dom';
 import { Box } from '@mui/material';
 import './App.scss';
-import { Navbar } from './components/Navbar';
-import { HomePage } from './pages/HomePage';
-import { ExerciseDetailPage } from './pages/ExerciseDetailPage';
-import { Footer } from './components/Footer';
+import { Navbar } from '../Navbar';
+import { HomePage } from '../../pages/HomePage';
+import { ExerciseDetailPage } from '../../pages/ExerciseDetailPage';
+import { Footer } from '../Footer';
 
 
 
