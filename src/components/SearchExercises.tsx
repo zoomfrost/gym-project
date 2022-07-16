@@ -28,13 +28,13 @@ export const SearchExercises = ({data}: ExercisesProps) => {
     const {data: bodyPartsData} = useGetExercisesQuery('exercises/bodyPartList');
 
     const bodyPart = useSelector((state: RootState) => state.gym.bodyPart);
+    
 
     const { register, reset, handleSubmit, formState: { errors } } = useForm<FormValues>({
         resolver: yupResolver(schema)
       });
 
     const onSubmit: SubmitHandler<FormValues> = ({searchTerm}) => {
-        console.log(searchTerm)
         if (searchTerm) {
             const filteredExercises = data.filter((exercise: ExerciseData) => 
                 exercise.name.toLowerCase().includes(searchTerm)
@@ -42,7 +42,6 @@ export const SearchExercises = ({data}: ExercisesProps) => {
                 || exercise.equipment.toLowerCase().includes(searchTerm)
                 || exercise.bodyPart.toLowerCase().includes(searchTerm)
             );
-            console.log(filteredExercises)
             dispatch(gymSetExercises(filteredExercises))
         }
         reset()

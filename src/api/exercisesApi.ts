@@ -2,15 +2,20 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 
 export interface FetchHeaders {
-    'X-RapidAPI-Host': string
-    'X-RapidAPI-Key': string
+    headers: {
+        'X-RapidAPI-Host': string
+        'X-RapidAPI-Key': string
+    }
 }
 
 
-const exerciseHeaders = {
+export const exerciseHeaders = {
     'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com',
-    'X-RapidAPI-Key': 'fde75d440fmsh7ca357a22a651e6p19cd65jsna6a19ab47c01'
+    'X-RapidAPI-Key': 'c548f3d7bbmsh3d260716ca14f97p10f911jsn422616da69d7'
 };
+
+// c548f3d7bbmsh3d260716ca14f97p10f911jsn422616da69d7
+// fde75d440fmsh7ca357a22a651e6p19cd65jsna6a19ab47c01
 
 const baseUrl = 'https://exercisedb.p.rapidapi.com';
 const createRequest = (url: string) => ({url, headers: exerciseHeaders});

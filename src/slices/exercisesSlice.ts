@@ -4,7 +4,7 @@ const initialState = {
     bodyPart: [],
     exercises: [],
     selectedBodyPart: 'all',
-    currentPage: 1
+    currentPage: 1,
 }
 
 const gymSlice = createSlice({

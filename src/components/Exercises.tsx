@@ -5,19 +5,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { ExerciseData } from '../types/interfaces';
 import { ExerciseCard } from './ExerciseCard';
-import { gymSetCurrentPage } from '../slices/exercisesSlice';
-import { ChangeEvent } from 'react';
+import { gymSetCurrentPage, gymSetExercises } from '../slices/exercisesSlice';
+import { ChangeEvent, useEffect, useState } from 'react';
+import {FetchHeaders, useGetExercisesQuery, exerciseHeaders } from '../api/exercisesApi';
+
+
+export const fetchData = async (url: string, headers: typeof exerciseHeaders) => {
+  const res = await fetch(url, {headers});
+  const data = await res.json();
+
+  return data;
+};
 
 
 export const Exercises = () => {
   const exercises: Array<ExerciseData> = useSelector((state: RootState) => state.gym.exercises);
   const dispatch = useDispatch()
   const currentPage = useSelector((state: RootState) => state.gym.currentPage);
+  const selectedBodyPart = useSelector((state: RootState) => state.gym.selectedBodyPart);
+  
   const countPerPage = 9;
 
   const indexOfLastExercise = currentPage * countPerPage;
   const indexOfFirstExercise = indexOfLastExercise - countPerPage;
   const currentExercises = exercises.slice(indexOfFirstExercise, indexOfLastExercise);
+
+  
 
   const paginate = (event: ChangeEvent<unknown>, page: number) => {
     dispatch(gymSetCurrentPage(page));
@@ -25,6 +38,20 @@ export const Exercises = () => {
     window.scrollTo({top: 1800, behavior: 'smooth'})
 
   }
+
+
+  useEffect(() => {
+    const fetchExercisesData = async () => {
+      let exercisesData = [];
+      if (selectedBodyPart === 'all') {
+        exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseHeaders);
+      } else {
+        exercisesData = await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${selectedBodyPart}`, exerciseHeaders);
+      }
+      dispatch(gymSetExercises(exercisesData))
+  }
+  fetchExercisesData()
+  }, [selectedBodyPart]);
 
   return (
     <Box id='exercises'
