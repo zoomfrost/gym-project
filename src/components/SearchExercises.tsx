@@ -1,28 +1,19 @@
-import { useEffect, useState} from 'react';
-import { Box, Button, Input, Stack, TextField, Typography } from '@mui/material';
+import { useEffect} from 'react';
+import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { HorizontalScrollBar } from './HorizontalScrollBar';
 import { useGetExercisesQuery } from '../api/exercisesApi';
-import {gymSetBodyPart, gymSetExercises, gymSetSearch} from '../slices/exercisesSlice';
+import {gymSetBodyPart, gymSetExercises} from '../slices/exercisesSlice';
 import {useSelector, useDispatch} from 'react-redux';
 import { RootState } from '../store/index';
+import { ExerciseData, ExercisesProps } from '../types/interfaces';
 
 
 interface FormValues {
     searchTerm: string
 }
-
-interface ExerciseData {
-    bodyPart: string,
-    equipment: string,
-    gifUrl: string,
-    id: string,
-    name: string,
-    target: string
-}
-
 
 
 const schema = yup.object({
@@ -30,23 +21,30 @@ const schema = yup.object({
 }).required();
 
 
-export const SearchExercises = () => {
+export const SearchExercises = ({data}: ExercisesProps) => {
 
     const dispatch = useDispatch();
 
-    const {isLoading, error, data} = useGetExercisesQuery('exercises');
-    const {data: bodyPartsData} = useGetExercisesQuery('exercises/bodyPartList')
+    const {data: bodyPartsData} = useGetExercisesQuery('exercises/bodyPartList');
 
     const bodyPart = useSelector((state: RootState) => state.gym.bodyPart);
-    console.log(bodyPart)
-    const search = useSelector((state: RootState) => state.gym.search);
 
     const { register, reset, handleSubmit, formState: { errors } } = useForm<FormValues>({
         resolver: yupResolver(schema)
       });
 
-    const onSubmit: SubmitHandler<FormValues> = data => {
-        dispatch(gymSetSearch(data?.searchTerm))
+    const onSubmit: SubmitHandler<FormValues> = ({searchTerm}) => {
+        console.log(searchTerm)
+        if (searchTerm) {
+            const filteredExercises = data.filter((exercise: ExerciseData) => 
+                exercise.name.toLowerCase().includes(searchTerm)
+                || exercise.target.toLowerCase().includes(searchTerm)
+                || exercise.equipment.toLowerCase().includes(searchTerm)
+                || exercise.bodyPart.toLowerCase().includes(searchTerm)
+            );
+            console.log(filteredExercises)
+            dispatch(gymSetExercises(filteredExercises))
+        }
         reset()
     };
 
@@ -56,17 +54,6 @@ export const SearchExercises = () => {
         }
     }, [bodyPartsData]);   
    
-   const handleSearch = () => {
-        if (search) {
-            const filteredExercises = data.filter((exercise: ExerciseData) => 
-                exercise.name.toLowerCase().includes(search)
-                || exercise.target.toLowerCase().includes(search)
-                || exercise.equipment.toLowerCase().includes(search)
-                || exercise.bodyPart.toLowerCase().includes(search)
-            );
-            dispatch(gymSetExercises(filteredExercises))
-        }
-   }
 
     
 
@@ -103,7 +90,7 @@ export const SearchExercises = () => {
                             backgroundColor: '#fff',
                             borderRadius: '40px'
                         }}
-                        inputProps={{...register('searchTerm', { required: true, minLength: 2 }), defaultValue: search}}
+                        inputProps={{...register('searchTerm', { required: true, minLength: 2 }), defaultValue: ''}}
                         placeholder='Search Exercises'
                         error={errors.searchTerm?.message != null}
                         label={errors.searchTerm?.message != null ? 'Error' : null}

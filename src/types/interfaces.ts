@@ -14,3 +14,21 @@ export interface ScrollableBoxWrapperProps extends React.HTMLAttributes<HTMLDivE
     itemId: string
     children: React.ReactNode
 }
+
+export interface ExerciseData {
+    bodyPart: string,
+    equipment: string,
+    gifUrl: string,
+    id: string,
+    name: string,
+    target: string
+}
+
+export interface ExercisesProps {
+    data: Array<ExerciseData>
+}
+
+export interface ExerciseCardProps {
+    key?: number
+    exercise: ExerciseData
+}

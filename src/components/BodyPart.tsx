@@ -11,6 +11,7 @@ import { RootState } from "../store";
 export const BodyPart = ({data}: HorizontalBodyPartProps<string>) => {
     const dispatch = useDispatch()
     const selectedBodyPart = useSelector((state: RootState) => state.gym.selectedBodyPart);
+    
   return (
     <Stack
         component='button'

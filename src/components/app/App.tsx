@@ -1,6 +1,6 @@
 import {Route, Routes} from 'react-router-dom';
 import { Box } from '@mui/material';
-import './App.scss';
+import '../../App.scss';
 import { Navbar } from '../Navbar';
 import { HomePage } from '../../pages/HomePage';
 import { ExerciseDetailPage } from '../../pages/ExerciseDetailPage';

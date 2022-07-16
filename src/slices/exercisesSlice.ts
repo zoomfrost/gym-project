@@ -1,19 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    search: '',
     bodyPart: [],
     exercises: [],
-    selectedBodyPart: 'all'
+    selectedBodyPart: 'all',
+    currentPage: 1
 }
 
 const gymSlice = createSlice({
     name: 'gym',
     initialState,
     reducers: {
-        gymSetSearch: (state, action) => {
-            state.search = action.payload
-        },
         gymSetBodyPart: (state, action) => {
             state.bodyPart = action.payload
         },
@@ -22,6 +19,9 @@ const gymSlice = createSlice({
         },
         gymSetSelectedBodyPart: (state, action) => {
             state.selectedBodyPart = action.payload
+        },
+        gymSetCurrentPage: (state, action) => {
+            state.currentPage = action.payload
         }
     }
 });
@@ -31,8 +31,8 @@ const {actions, reducer} = gymSlice;
 export default reducer;
 
 export const {
-    gymSetSearch,
     gymSetBodyPart,
     gymSetExercises,
-    gymSetSelectedBodyPart
+    gymSetSelectedBodyPart,
+    gymSetCurrentPage
 } = actions
