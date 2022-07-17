@@ -3,12 +3,12 @@ import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { HorizontalScrollBar } from './HorizontalScrollBar';
-import { useGetExercisesQuery } from '../api/exercisesApi';
-import {gymSetBodyPart, gymSetExercises} from '../slices/exercisesSlice';
+import { HorizontalScrollBar } from '../HorizontalScrollBar';
+import { useGetExercisesQuery } from '../../api/exercisesApi';
+import {gymSetBodyPart, gymSetExercises} from '../../slices/exercisesSlice';
 import {useSelector, useDispatch} from 'react-redux';
-import { RootState } from '../store/index';
-import { ExerciseData, ExercisesProps } from '../types/interfaces';
+import { RootState } from '../../store/index';
+import { ExerciseData, ExercisesProps } from '../../types/interfaces';
 
 
 interface FormValues {

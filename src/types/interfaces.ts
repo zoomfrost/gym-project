@@ -24,6 +24,12 @@ export interface ExerciseData {
     target: string
 }
 
+export interface exerciseDetailProps {
+    exerciseDetail: ExerciseData
+}
+
+
+
 export interface ExercisesProps {
     data: Array<ExerciseData>
 }

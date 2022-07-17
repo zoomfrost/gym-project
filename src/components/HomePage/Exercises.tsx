@@ -1,13 +1,12 @@
-
 import Pagination from '@mui/material/Pagination';
 import { Box, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
-import { ExerciseData } from '../types/interfaces';
-import { ExerciseCard } from './ExerciseCard';
-import { gymSetCurrentPage, gymSetExercises } from '../slices/exercisesSlice';
-import { ChangeEvent, useEffect, useState } from 'react';
-import {FetchHeaders, useGetExercisesQuery, exerciseHeaders } from '../api/exercisesApi';
+import { RootState } from '../../store';
+import { ExerciseData, ExercisesProps } from '../../types/interfaces';
+import { ExerciseCard } from '../ExerciseCard';
+import { gymSetCurrentPage, gymSetExercises } from '../../slices/exercisesSlice';
+import { ChangeEvent, useEffect} from 'react';
+import {exerciseHeaders} from '../../api/exercisesApi';
 
 
 export const fetchData = async (url: string, headers: typeof exerciseHeaders) => {
@@ -18,7 +17,7 @@ export const fetchData = async (url: string, headers: typeof exerciseHeaders) =>
 };
 
 
-export const Exercises = () => {
+export const Exercises = ({data}: ExercisesProps) => {
   const exercises: Array<ExerciseData> = useSelector((state: RootState) => state.gym.exercises);
   const dispatch = useDispatch()
   const currentPage = useSelector((state: RootState) => state.gym.currentPage);
@@ -38,13 +37,13 @@ export const Exercises = () => {
     window.scrollTo({top: 1800, behavior: 'smooth'})
 
   }
-
+// 
 
   useEffect(() => {
     const fetchExercisesData = async () => {
       let exercisesData = [];
       if (selectedBodyPart === 'all') {
-        exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseHeaders);
+        exercisesData = data
       } else {
         exercisesData = await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${selectedBodyPart}`, exerciseHeaders);
       }

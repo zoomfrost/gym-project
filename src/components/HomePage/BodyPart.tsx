@@ -1,11 +1,11 @@
 import { Stack, Typography } from "@mui/material";
 
-import { HorizontalBodyPartProps } from "../types/interfaces";
+import { HorizontalBodyPartProps } from "../../types/interfaces";
 import { useDispatch, useSelector } from "react-redux";
-import { gymSetSelectedBodyPart } from "../slices/exercisesSlice";
+import { gymSetSelectedBodyPart } from "../../slices/exercisesSlice";
 
-import icon from '../assets/icons/gym.png';
-import { RootState } from "../store";
+import icon from '../../assets/icons/gym.png';
+import { RootState } from "../../store";
 
 
 export const BodyPart = ({data}: HorizontalBodyPartProps<string>) => {

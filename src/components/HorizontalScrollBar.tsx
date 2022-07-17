@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { HorizontalBodyPartProps, ScrollableBoxWrapperProps } from "../types/interfaces";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 
-import {BodyPart} from './BodyPart';
+import {BodyPart} from './HomePage/BodyPart';
 import { useContext } from "react";
 
 import leftArrow from '../assets/icons/left-arrow.png';

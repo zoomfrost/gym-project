@@ -1,10 +1,9 @@
 
 import { Box } from "@mui/material";
-import { useState } from "react";
 import { useGetExercisesQuery } from "../api/exercisesApi";
-import { Exercises } from "../components/Exercises";
-import { HeroBanner } from "../components/HeroBanner";
-import { SearchExercises } from "../components/SearchExercises";
+import { Exercises } from "../components/HomePage/Exercises";
+import { HeroBanner } from "../components/HomePage/HeroBanner";
+import { SearchExercises } from "../components/HomePage/SearchExercises";
 
 export const HomePage = () => {
   const {isLoading, error, data} = useGetExercisesQuery('exercises');
@@ -15,8 +14,8 @@ export const HomePage = () => {
     return (
       <Box>
         <HeroBanner />
-        <SearchExercises data={data}/>
-        <Exercises/>
+        {/* <SearchExercises data={data}/>
+        <Exercises data={data}/> */}
       </Box>
     )
   }

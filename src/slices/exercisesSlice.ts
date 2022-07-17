@@ -34,5 +34,5 @@ export const {
     gymSetBodyPart,
     gymSetExercises,
     gymSetSelectedBodyPart,
-    gymSetCurrentPage
+    gymSetCurrentPage,
 } = actions
