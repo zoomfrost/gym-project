@@ -1,12 +1,13 @@
 import { useGetVideosQuery } from "../../api/youTubeApi";
 import { Box, Stack, Typography } from "@mui/material";
+import { Spinner } from "../Spinner";
 
 
 export const ExerciseVideos = ({name}: any) => {
 
   const {isLoading: youtubeLoading, data: videosData} = useGetVideosQuery(`search?query=${name}`);
 
-  if(youtubeLoading) return <p>Loading</p>
+  if(youtubeLoading) return <Spinner />
   return (
     <Box
       sx={{marginTop: {lg: '200px', xs: '20px'}}}
@@ -33,6 +34,14 @@ export const ExerciseVideos = ({name}: any) => {
             rel="noreferrer"
           >
             <img style={{width: '387px', height: '217px', objectFit: 'cover'}} src={video.video.thumbnails[0].url} alt={video.video.title} />
+            <Box>
+              <Typography variant='h6' sx={{color: '#000'}}>
+                {video.video.title}
+              </Typography>
+              <Typography variant='overline' sx={{color: '#000'}}>
+                {video.video.channelName}
+              </Typography>
+            </Box>
           </a>
         ))}
       </Stack>

@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { HorizontalBodyPartProps, ScrollableBoxWrapperProps } from "../types/interfaces";
+import { ExerciseData, HorizontalBodyPartProps, ScrollableBoxWrapperProps } from "../types/interfaces";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 
 import {BodyPart} from './HomePage/BodyPart';
@@ -7,6 +7,7 @@ import { useContext } from "react";
 
 import leftArrow from '../assets/icons/left-arrow.png';
 import rightArrow from '../assets/icons/right-arrow.png';
+import { ExerciseCard } from "./ExerciseCard";
   
 
 const LeftArrow = () => {
@@ -38,7 +39,7 @@ const ScrollableBoxWrapper = ({ children, ...props}: ScrollableBoxWrapperProps) 
 }
 
 
-export const HorizontalScrollBar = ({data}: HorizontalBodyPartProps<Array<string>>) => {
+export const HorizontalScrollBar = ({data, isBodyPart}: HorizontalBodyPartProps<Array<any>>) => {
   return (
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
       {data.map((item) => (
@@ -50,7 +51,9 @@ export const HorizontalScrollBar = ({data}: HorizontalBodyPartProps<Array<string
               title={item}
               m="0 40px"
             >
-              <BodyPart data={item}/>
+              {isBodyPart ? <BodyPart data={item}/> :
+                <ExerciseCard exercise={item}/> 
+              }
             </Box>
           </ScrollableBoxWrapper>
         )

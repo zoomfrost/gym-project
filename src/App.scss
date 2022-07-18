@@ -23,6 +23,15 @@ body {
       width: 700px;
       height: 900px;
       margin-top: -330px;
+      @media screen and (max-width: 1200px) {
+        width: 350px;
+        height: 500px;
+        top: 200px;
+        right: 100px;
+      }
+      @media screen and (max-width: 950px) {
+        display: none;
+      }
     }
   }
 }
@@ -88,8 +97,9 @@ body {
     flex-direction: column;
     gap: 24px;
     width: 387px;
-    height: 381px;
+    min-height: 330px;
     text-decoration: none;
+    padding-bottom: 10px;
   }
 }
 
