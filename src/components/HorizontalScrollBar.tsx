@@ -8,6 +8,7 @@ import { useContext } from "react";
 import leftArrow from '../assets/icons/left-arrow.png';
 import rightArrow from '../assets/icons/right-arrow.png';
 import { ExerciseCard } from "./ExerciseCard";
+import { SimilarTarget } from "./SimilarTarget";
   
 
 const LeftArrow = () => {
@@ -39,7 +40,7 @@ const ScrollableBoxWrapper = ({ children, ...props}: ScrollableBoxWrapperProps) 
 }
 
 
-export const HorizontalScrollBar = ({data, isBodyPart}: HorizontalBodyPartProps<Array<any>>) => {
+export const HorizontalScrollBar = ({data, child}: HorizontalBodyPartProps<Array<any>>) => {
   return (
     <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
       {data.map((item) => (
@@ -51,9 +52,9 @@ export const HorizontalScrollBar = ({data, isBodyPart}: HorizontalBodyPartProps<
               title={item}
               m="0 40px"
             >
-              {isBodyPart ? <BodyPart data={item}/> :
-                <ExerciseCard exercise={item}/> 
-              }
+              {child === 'bodyPart' && <BodyPart data={item}/>}
+              {child === 'exercises' && <ExerciseCard exercise={item} />}
+              {child === 'instructions' && <SimilarTarget data={item} /> }
             </Box>
           </ScrollableBoxWrapper>
         )

@@ -121,7 +121,7 @@ export const SearchExercises = ({data}: ExercisesProps) => {
             >
                 <HorizontalScrollBar
                     data={bodyPart}
-                    isBodyPart={true}
+                    child='bodyPart'
                 />
             </Box>
         </Stack>

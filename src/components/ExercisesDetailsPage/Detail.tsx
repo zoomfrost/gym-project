@@ -4,6 +4,7 @@ import bodyPartImage from '../../assets/icons/body-part.png';
 import targetImage from '../../assets/icons/target.png';
 import equipmentImage from '../../assets/icons/equipment.png';
 import {exerciseDetailProps } from "../../types/interfaces";
+import { useGetInsQuery } from "../../api/exercisesInstrucApi";
 
 
 

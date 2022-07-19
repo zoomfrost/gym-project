@@ -10,14 +10,16 @@ import { Footer } from '../Footer';
 
 export const App = () => {
   return (
-    <Box width='400px' sx={{width: {xl: '1488px'}}} m='auto'>
-      <Navbar/>
-      <Routes>
-          <Route path='/' element={<HomePage/>} />
-          <Route path='/exercise/:id' element={<ExerciseDetailPage/>} />
-      </Routes>
+    <>
+      <Box width='400px' sx={{width: {xl: '1488px'}}} m='auto'>
+        <Navbar/>
+        <Routes>
+            <Route path='/' element={<HomePage/>} />
+            <Route path='/exercise/:id' element={<ExerciseDetailPage/>} />
+        </Routes>
+      </Box>
       <Footer />
-    </Box>
+    </>
   )
 }
 

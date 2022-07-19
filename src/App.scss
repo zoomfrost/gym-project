@@ -91,6 +91,11 @@ body {
     img {
       height: 326px;
     }
+    &-similar {
+      &:hover {
+        transform: none;
+      }
+    }
   }
   &__video {
     display: flex;

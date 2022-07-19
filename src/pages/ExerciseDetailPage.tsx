@@ -23,7 +23,7 @@ export const ExerciseDetailPage = () => {
       <Box>
         <Detail exerciseDetail={exerciseDetail}/>
         <ExerciseVideos name={exerciseDetail.name} />
-        <SimilarExercises exerciseTarget={exerciseDetail.target} />
+        <SimilarExercises exerciseTarget={exerciseDetail.target} exerciseEquipment={exerciseDetail.equipment} />
       </Box>
     )
   }

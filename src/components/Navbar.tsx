@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 import Logo from '../assets/images/Logo.png';
 
@@ -19,7 +19,7 @@ export const Navbar = () => {
         fontSize='24px'
         alignItems='flex-end'
       >
-        <Link  to='/' style={{textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625'}}>Home</Link>
+        <NavLink to='/' style={{textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625'}}>Home</NavLink>
       </Stack>
     </Stack>
   )

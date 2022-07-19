@@ -34,5 +34,7 @@ export const exercisesApi = createApi({
 
 
 export const {
-    useGetExercisesQuery
+    useGetExercisesQuery,
+    
 } = exercisesApi;
+

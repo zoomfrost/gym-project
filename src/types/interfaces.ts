@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 export interface HorizontalBodyPartProps<T> {
     data: T,
-    isBodyPart?: boolean
+    child?: string
 }
 
 export interface ScrollableBoxWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -23,6 +23,14 @@ export interface exerciseDetailProps {
     exerciseDetail: ExerciseData
 }
 
+export interface SimilarTargetData {
+    difficulty: string
+    equipment: string
+    instructions: string
+    muscle: string
+    name: string
+    type: string
+}
 
 
 export interface ExercisesProps {
