@@ -19,7 +19,8 @@ export const Navbar = () => {
         fontSize='24px'
         alignItems='flex-end'
       >
-        <NavLink to='/' style={{textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625'}}>Home</NavLink>
+        <NavLink end to='/' style={({isActive}) => ({textDecoration: 'none', color: '#3A1212', borderBottom: isActive ? '3px solid #FF2625' : 'none'})}>Home</NavLink>
+        <NavLink end to='/calories' style={({isActive}) => ({textDecoration: 'none', color: '#3A1212', borderBottom: isActive ? '3px solid #FF2625' : 'none'})}>Calories Burned</NavLink>
       </Stack>
     </Stack>
   )

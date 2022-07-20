@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ElementType, ReactElement, SetStateAction } from "react";
+import { JsxAttribute } from "typescript";
 
 export interface HorizontalBodyPartProps<T> {
     data: T,
@@ -30,6 +31,15 @@ export interface SimilarTargetData {
     muscle: string
     name: string
     type: string
+}
+
+export interface HeroBannerProps {
+    title: string
+    subtitle: string
+    subtitle2: ReactElement
+    btnText: string
+    imgSrc: string
+    link: string
 }
 
 

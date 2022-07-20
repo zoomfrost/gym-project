@@ -5,6 +5,7 @@ import { Navbar } from '../Navbar';
 import { HomePage } from '../../pages/HomePage';
 import { ExerciseDetailPage } from '../../pages/ExerciseDetailPage';
 import { Footer } from '../Footer';
+import { CaloriesPage } from '../../pages/CaloriesPage';
 
 
 
@@ -16,6 +17,7 @@ export const App = () => {
         <Routes>
             <Route path='/' element={<HomePage/>} />
             <Route path='/exercise/:id' element={<ExerciseDetailPage/>} />
+            <Route path='/calories' element={<CaloriesPage/>} />
         </Routes>
       </Box>
       <Footer />

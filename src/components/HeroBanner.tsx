@@ -1,8 +1,8 @@
-import { Box, Stack, Typography, Button } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 
-import heroBannerImg from '../../assets/images/banner.png';
+import { HeroBannerProps } from "../types/interfaces";
 
-export const HeroBanner = () => {
+export const HeroBanner = ({title, subtitle, subtitle2, btnText, imgSrc, link}: HeroBannerProps) => {
   return (
     <Box sx={{
         mt: {lg: '212px', xs: '70px'},
@@ -12,25 +12,25 @@ export const HeroBanner = () => {
         p='20px'
     >
         <Typography color='#FF2625' fontWeight='600' fontSize='26px'>
-            Fitness Club
+            {title}
         </Typography>
         <Typography
             fontWeight={700}
             sx={{fontSize: {lg: '44px', xs: '40px'}}}    
             mb='23px' mt='30px'    
         >
-            Sweat, Smile <br /> and Repeat
+            {subtitle}
         </Typography>
         <Typography mb={4} fontSize='22px' lineHeight='35px'>
-            Check out the most effective exercises
+            {subtitle2}
         </Typography>
         <Button
             variant='contained'   
             color='error'
-            href='#exercises' 
+            href={link} 
             sx={{backgroundColor: '#ff2625', padding: '10px'}}    
         >
-            Explore Exercises
+            {btnText}
         </Button>
         <Typography
             fontWeight={600}
@@ -43,7 +43,7 @@ export const HeroBanner = () => {
         >
             Exercise
         </Typography>
-        <img src={heroBannerImg} alt="banner" className="promo__banner-img" />
+        <img src={imgSrc} alt="banner" className="promo__banner-img" />
     </Box>
   )
 }

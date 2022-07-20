@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 
-const exerciseInsHeaders = {
+export const exerciseInsHeaders = {
     'X-Api-Key': 'rhphRzRCYGE9D2dVytLPDw==BxIaz8Y3r29dvJoN'
 }
 

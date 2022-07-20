@@ -24,6 +24,8 @@ export const SimilarExercises = ({exerciseEquipment, exerciseTarget}: SimilarPro
         return 'middle_back';
       case 'levator scapulae':
         return 'neck';
+      case 'cardiovascular system' || 'serratus anterior' || 'upper back':
+        return 'middle_back'
       default:
         return target
     }
@@ -31,11 +33,11 @@ export const SimilarExercises = ({exerciseEquipment, exerciseTarget}: SimilarPro
 
   const muscleGroup = checkTarget(exerciseTarget)
 
-  const {isLoading: equipmentLoading, data: equipmentData} = useGetExercisesQuery(`exercises/equipment/${exerciseEquipment}`);
+  // const {isLoading: equipmentLoading, data: equipmentData} = useGetExercisesQuery(`exercises/equipment/${exerciseEquipment}`);
   const {isLoading: similarTargetLoading, data: similarTargetData} = useGetInsQuery(`exercises?muscle=${muscleGroup}`);
 
 
-  if(equipmentLoading || similarTargetLoading) return <Spinner />
+  if(false || similarTargetLoading) return <Spinner />
 
   return (
     <Box sx={{mt: {lg: '100px', xs: '0'}}}>
@@ -48,9 +50,9 @@ export const SimilarExercises = ({exerciseEquipment, exerciseTarget}: SimilarPro
       <Typography mt={3} mb={5} variant='h4'>
       Similar <span style={{ color: '#FF2625', textTransform: 'capitalize' }}>Equipment</span> exercises
       </Typography>
-      <Stack direction='row' sx={{p: '2', position: 'relative'}}>
+      {/* <Stack direction='row' sx={{p: '2', position: 'relative'}}>
         {equipmentData.length && <HorizontalScrollBar child='exercises' data={equipmentData}/>}
-      </Stack>
+      </Stack> */}
     </Box>
   )
 }

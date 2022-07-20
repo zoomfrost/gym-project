@@ -13,17 +13,17 @@ import { Spinner } from "../components/Spinner";
 export const ExerciseDetailPage = () => {
 
   const {id} = useParams();
-  const {isLoading: exerciseDetailLoading, data: exerciseDetail} = useGetExercisesQuery(`exercises/exercise/${id}`);
+  // const {isLoading: exerciseDetailLoading, data: exerciseDetail} = useGetExercisesQuery(`exercises/exercise/${id}`);
 
 
-  if(exerciseDetailLoading) {
+  if(false) {
     return <Spinner />
   } else {
     return (
       <Box>
-        <Detail exerciseDetail={exerciseDetail}/>
+        {/* <Detail exerciseDetail={exerciseDetail}/>
         <ExerciseVideos name={exerciseDetail.name} />
-        <SimilarExercises exerciseTarget={exerciseDetail.target} exerciseEquipment={exerciseDetail.equipment} />
+        <SimilarExercises exerciseTarget={exerciseDetail.target} exerciseEquipment={exerciseDetail.equipment} /> */}
       </Box>
     )
   }
