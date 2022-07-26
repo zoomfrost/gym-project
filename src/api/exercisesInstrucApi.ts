@@ -15,7 +15,7 @@ export const exercisesInsApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl}),
     tagTypes: ['ExercisesInstruc'],
     endpoints: (builder) => ({
-        getIns: builder.query({
+        getDataNinjaApi: builder.query({
             query: (url) => createRequest(url)
         })
     })
@@ -23,5 +23,5 @@ export const exercisesInsApi = createApi({
 
 
 export const {
-    useGetInsQuery
+    useGetDataNinjaApiQuery
 } = exercisesInsApi

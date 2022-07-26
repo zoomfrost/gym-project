@@ -1,43 +1,48 @@
-import { Autocomplete, Box, Button, Stack, TextField, Typography } from "@mui/material"
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, Button, Stack, TextField, Typography } from "@mui/material"
+import { SubmitHandler, useForm  } from "react-hook-form";
+
+import { useGetDataNinjaApiQuery } from "../../api/exercisesInstrucApi";
+import { useDispatch, useSelector } from "react-redux";
+import { gymSetCaloriesData } from "../../slices/exercisesSlice";
+import * as yup from "yup";
+import { RootState } from "../../store";
+
+
+interface FormValues {
+    activity: string
+    weight?: number
+    duration?: number
+}
+
+const caloriesSchema = yup.object({
+    activity: yup.string().required('This field is required').min(2, 'Min 2 symbols'),
+    weight: yup.number().typeError('Only numbers are allowed').min(1, 'min 1 symbol'),
+    duration: yup.number().typeError('Only numbers are allowed').min(1, 'min 1 symbol')
+}).required();
 
 export const SearchCalories = () => {
 
-    const activities = [
-        'yoga',
-        'aerobics',
-        'swimming',
-        'jogging',
-        'dancing',
-        'golf',
-        'climbing',
-        'table tennis',
-        'tennis',
-        'football',
-        'basketball',
-        'soccer'
-    ]
+    const dispatch = useDispatch()
+    const caloriesData = useSelector((state: RootState) => state.gym.caloriesData);
+    const {activity, weight, duration} = caloriesData
 
+    const {isLoading, data} = useGetDataNinjaApiQuery(`caloriesburned?activity=${activity}&weight=${weight}&duration=${duration}`, {skip: !activity});
 
-    // <Autocomplete
-//     freeSolo
-//     id="free-solo-2-demo"
-//     disableClearable
-//     options={top100Films.map((option) => option.title)}
-//     renderInput={(params) => (
-//       <TextField
-//         {...params}
-//         label="Search input"
-//         InputProps={{
-//           ...params.InputProps,
-//           type: 'search',
-//         }}
-//       />
-//     )}
-//   />
+    const { register, reset, handleSubmit, formState: { errors } } = useForm<FormValues>({
+        resolver: yupResolver(caloriesSchema)
+    });
+    
+    console.log(data)
 
-
-// eslint-disable-next-line no-lone-blocks
- 
+    const onSubmit: SubmitHandler<FormValues> = ({activity, weight = 160, duration = 60}) => {
+        let requestWeight = weight
+        if (weight !== 160) {
+            requestWeight = Math.round(weight * 2.2)
+        }
+        dispatch(gymSetCaloriesData({activity, weight: requestWeight, duration}))
+        reset()
+    };
 
   return (
     <Stack 
@@ -57,35 +62,34 @@ export const SearchCalories = () => {
                 Let`s calculate <br /> Your burned calories
             </Typography>
             <Box position='relative' mb='72px'>
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <Stack direction='column' spacing={2}>
-                        <Autocomplete 
-                            freeSolo
-                            id="free-solo-2-demo"
-                            disableClearable
-                            options={activities.map((option) => option)}
-                            renderInput={(params) => (
-                                <TextField
-                                {...params}
-                                placeholder='Activity'
-                                sx={{
-                                    input: {
-                                        fontWeight: '700', 
-                                        border: 'none', 
-                                        borderRadius: '4px',
-                                    },     
-                                    width: {
-                                        lg: '800px', 
-                                        xs: '350px'
-                                    },
-                                    backgroundColor: '#fff',
-                                    borderRadius: '40px'
-                                }}
-                                />
-                            )}
+                        <TextField
+                            inputProps={{...register('activity', { required: true, minLength: 3 }), defaultValue: ''}}
+                            error={errors.activity?.message != null}
+                            label={errors.activity?.message != null ? 'Error' : null}
+                            helperText={errors.activity?.message}
+                            placeholder='Activity'
+                            sx={{
+                                input: {
+                                    fontWeight: '700', 
+                                    border: 'none', 
+                                    borderRadius: '4px',
+                                },     
+                                width: {
+                                    lg: '800px', 
+                                    xs: '350px'
+                                },
+                                backgroundColor: '#fff',
+                                borderRadius: '40px'
+                            }}
                         />
                         <TextField
                             placeholder='Your weight (kg)'
+                            inputProps={{...register('weight', { required: false, minLength: 1 }), defaultValue: ''}}
+                            error={errors.weight?.message != null}
+                            label={errors.weight?.message != null ? 'Error' : null}
+                            helperText={errors.weight?.message}
                             sx={{
                                 input: {
                                     fontWeight: '700', 
@@ -101,7 +105,11 @@ export const SearchCalories = () => {
                             }}
                         /> 
                         <TextField
-                            placeholder="Duration"
+                            placeholder="Duration (minutes)"
+                            inputProps={{...register('duration', { required: false, minLength: 1 }), defaultValue: ''}}
+                            error={errors.duration?.message != null}
+                            label={errors.duration?.message != null ? 'Error' : null}
+                            helperText={errors.duration?.message}
                             sx={{
                                 input: {
                                     fontWeight: '700', 
@@ -142,6 +150,7 @@ export const SearchCalories = () => {
                     p: '20px'
                 }}
             >
+
             </Box>
         </Stack>
   )

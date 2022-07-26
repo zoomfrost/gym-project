@@ -5,6 +5,11 @@ const initialState = {
     exercises: [],
     selectedBodyPart: 'all',
     currentPage: 1,
+    caloriesData: {
+        activity: '',
+        weight: 160,
+        duration: 60
+    }
 }
 
 const gymSlice = createSlice({
@@ -22,6 +27,9 @@ const gymSlice = createSlice({
         },
         gymSetCurrentPage: (state, action) => {
             state.currentPage = action.payload
+        },
+        gymSetCaloriesData: (state, action) => {
+            state.caloriesData = action.payload
         }
     }
 });
@@ -35,4 +43,5 @@ export const {
     gymSetExercises,
     gymSetSelectedBodyPart,
     gymSetCurrentPage,
+    gymSetCaloriesData
 } = actions

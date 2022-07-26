@@ -1,8 +1,9 @@
 import { Box, Typography, Button } from "@mui/material";
+import { memo } from "react";
 
 import { HeroBannerProps } from "../types/interfaces";
 
-export const HeroBanner = ({title, subtitle, subtitle2, btnText, imgSrc, link}: HeroBannerProps) => {
+const Banner = ({title, subtitle, subtitle2, btnText, imgSrc, link}: HeroBannerProps) => {
   return (
     <Box sx={{
         mt: {lg: '212px', xs: '70px'},
@@ -47,3 +48,5 @@ export const HeroBanner = ({title, subtitle, subtitle2, btnText, imgSrc, link}: 
     </Box>
   )
 }
+
+export const HeroBanner = memo(Banner)

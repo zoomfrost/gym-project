@@ -8,12 +8,10 @@ import { useGetExercisesQuery } from '../../api/exercisesApi';
 import {gymSetBodyPart, gymSetExercises} from '../../slices/exercisesSlice';
 import {useSelector, useDispatch} from 'react-redux';
 import { RootState } from '../../store/index';
-import { ExerciseData, ExercisesProps } from '../../types/interfaces';
+import { ExerciseData, ExercisesProps, FormValues } from '../../types/interfaces';
 
 
-interface FormValues {
-    searchTerm: string
-}
+
 
 
 const schema = yup.object({

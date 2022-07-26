@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { useGetExercisesQuery } from '../../api/exercisesApi'
-import { useGetInsQuery } from '../../api/exercisesInstrucApi';
+import { useGetDataNinjaApiQuery } from '../../api/exercisesInstrucApi';
 import { HorizontalScrollBar } from '../HorizontalScrollBar';
 import { Spinner } from '../Spinner';
 
@@ -34,7 +34,7 @@ export const SimilarExercises = ({exerciseEquipment, exerciseTarget}: SimilarPro
   const muscleGroup = checkTarget(exerciseTarget)
 
   // const {isLoading: equipmentLoading, data: equipmentData} = useGetExercisesQuery(`exercises/equipment/${exerciseEquipment}`);
-  const {isLoading: similarTargetLoading, data: similarTargetData} = useGetInsQuery(`exercises?muscle=${muscleGroup}`);
+  const {isLoading: similarTargetLoading, data: similarTargetData} = useGetDataNinjaApiQuery(`exercises?muscle=${muscleGroup}`);
 
 
   if(false || similarTargetLoading) return <Spinner />

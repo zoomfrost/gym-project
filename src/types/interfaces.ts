@@ -1,5 +1,5 @@
 import { Dispatch, ElementType, ReactElement, SetStateAction } from "react";
-import { JsxAttribute } from "typescript";
+
 
 export interface HorizontalBodyPartProps<T> {
     data: T,
@@ -33,6 +33,13 @@ export interface SimilarTargetData {
     type: string
 }
 
+export interface SearchCaloriesData {
+    name: string
+    calories_per_hour: number
+    duration_minutes: number
+    total_calories: number
+}
+
 export interface HeroBannerProps {
     title: string
     subtitle: string
@@ -40,6 +47,11 @@ export interface HeroBannerProps {
     btnText: string
     imgSrc: string
     link: string
+}
+
+export interface FormValues {
+    searchTerm: string
+    
 }
 
 

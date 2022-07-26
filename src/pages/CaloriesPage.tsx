@@ -15,22 +15,21 @@ export const fetchData = async (url: string, headers: typeof exerciseInsHeaders)
 export const CaloriesPage = () => {
 
   const func = async () => {
-    const data = await fetchData('https://api.api-ninjas.com/v1/caloriesburned?activity=footba', exerciseInsHeaders);
+    const data = await fetchData('https://api.api-ninjas.com/v1/caloriesburned?activity=a', exerciseInsHeaders);
 
-    console.log(data)
   }
 
   func()
   return (
     <Box>
       <HeroBanner
-      title='Calculator'
-      subtitle='Control, track & follow'
-      subtitle2={<p>Find out how many calories <br/> you`ve been burned doing different activities</p>}
-      btnText='Find out'
-      imgSrc={caloriesLogo}
-      link='#search'
-    />
+        title='Calculator'
+        subtitle='Control, track & follow'
+        subtitle2={<span>Find out how many calories <br/> you`ve been burned doing different activities</span>}
+        btnText='Find out'
+        imgSrc={caloriesLogo}
+        link='#search'
+      />
     <SearchCalories />
     </Box>
 
