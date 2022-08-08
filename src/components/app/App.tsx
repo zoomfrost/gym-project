@@ -12,7 +12,7 @@ import { CaloriesPage } from '../../pages/CaloriesPage';
 export const App = () => {
   return (
     <>
-      <Box width='400px' sx={{width: {xl: '1488px'}}} m='auto'>
+      <Box width='400px' sx={{width: {xl: '1488px'}, p: {xs: '10px'}}} m='auto'>
         <Navbar/>
         <Routes>
             <Route path='/' element={<HomePage/>} />

@@ -33,14 +33,14 @@ export const SimilarExercises = ({exerciseEquipment, exerciseTarget}: SimilarPro
 
   const muscleGroup = checkTarget(exerciseTarget)
 
-  // const {isLoading: equipmentLoading, data: equipmentData} = useGetExercisesQuery(`exercises/equipment/${exerciseEquipment}`);
+  const {isLoading: equipmentLoading, data: equipmentData} = useGetExercisesQuery(`exercises/equipment/${exerciseEquipment}`);
   const {isLoading: similarTargetLoading, data: similarTargetData} = useGetDataNinjaApiQuery(`exercises?muscle=${muscleGroup}`);
 
 
-  if(false || similarTargetLoading) return <Spinner />
+  if(equipmentLoading || similarTargetLoading) return <Spinner />
 
   return (
-    <Box sx={{mt: {lg: '100px', xs: '0'}}}>
+    <Box sx={{mt: {lg: '100px', xs: '20px'}}}>
       <Typography mb={5} variant='h4'>
       Try these <span style={{ color: '#FF2625', textTransform: 'capitalize' }}>Exercises</span>
       </Typography>
@@ -50,9 +50,9 @@ export const SimilarExercises = ({exerciseEquipment, exerciseTarget}: SimilarPro
       <Typography mt={3} mb={5} variant='h4'>
       Similar <span style={{ color: '#FF2625', textTransform: 'capitalize' }}>Equipment</span> exercises
       </Typography>
-      {/* <Stack direction='row' sx={{p: '2', position: 'relative'}}>
+      <Stack direction='row' sx={{p: '2', position: 'relative'}}>
         {equipmentData.length && <HorizontalScrollBar child='exercises' data={equipmentData}/>}
-      </Stack> */}
+      </Stack>
     </Box>
   )
 }

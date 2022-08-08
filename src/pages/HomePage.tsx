@@ -9,9 +9,9 @@ import { Spinner } from "../components/Spinner";
 import heroBannerImg from '../assets/images/banner.jpg';
 
 export const HomePage = () => {
-  // const {isLoading, error, data} = useGetExercisesQuery('exercises');
+  const {isLoading, error, data} = useGetExercisesQuery('exercises');
 
-  if (false) {
+  if (isLoading) {
     return <Spinner />
   } else {
     return (
@@ -24,8 +24,8 @@ export const HomePage = () => {
           imgSrc={heroBannerImg}
           link='#exercises'
         />
-        {/* <SearchExercises data={data}/>
-        <Exercises data={data}/> */}
+        <SearchExercises data={data}/>
+        <Exercises data={data}/>
       </Box>
     )
   }

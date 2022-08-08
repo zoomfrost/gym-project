@@ -74,7 +74,7 @@ body {
 .exercise {
   &__card {
     width: 400px;
-    height: 445px;
+    min-height: 445px;
     background: #fff;
     border-top: 4px solid #FF2625;
     border-bottom-left-radius: 20px;
@@ -159,5 +159,8 @@ body {
     &__card {
       width: 280px;
     }
+  }
+  .arrow {
+    display: none;
   }
 }

@@ -82,7 +82,7 @@ export const SearchExercises = ({data}: ExercisesProps) => {
                             },     
                             width: {
                                 lg: '800px', 
-                                xs: '350px'
+                                xs: '300px'
                             },
                             backgroundColor: '#fff',
                             borderRadius: '40px'

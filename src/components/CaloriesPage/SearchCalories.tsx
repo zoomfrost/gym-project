@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { gymSetCaloriesData } from "../../slices/exercisesSlice";
 import * as yup from "yup";
 import { RootState } from "../../store";
+import { CaloriesStats } from "./CaloriesStats";
 
 
 interface FormValues {
@@ -45,7 +46,8 @@ export const SearchCalories = () => {
     };
 
   return (
-    <Stack 
+    <>  
+        <Stack 
             alignItems='center' 
             mt='37px' 
             justifyContent='center' 
@@ -78,7 +80,7 @@ export const SearchCalories = () => {
                                 },     
                                 width: {
                                     lg: '800px', 
-                                    xs: '350px'
+                                    xs: '300px'
                                 },
                                 backgroundColor: '#fff',
                                 borderRadius: '40px'
@@ -98,7 +100,7 @@ export const SearchCalories = () => {
                                 },     
                                 width: {
                                     lg: '800px', 
-                                    xs: '350px'
+                                    xs: '300px'
                                 },
                                 backgroundColor: '#fff',
                                 borderRadius: '40px'
@@ -118,7 +120,7 @@ export const SearchCalories = () => {
                                 },     
                                 width: {
                                     lg: '800px', 
-                                    xs: '350px'
+                                    xs: '300px'
                                 },
                                 backgroundColor: '#fff',
                                 borderRadius: '40px'
@@ -153,5 +155,9 @@ export const SearchCalories = () => {
 
             </Box>
         </Stack>
+        {data && 
+            <CaloriesStats {...data[0]} />
+        }
+    </>
   )
 }
