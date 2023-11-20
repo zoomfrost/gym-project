@@ -10,4 +10,3 @@
 - Material UI
 - Typescript
 - React Hook Form
-- 
